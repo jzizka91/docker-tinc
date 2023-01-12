@@ -1,0 +1,5 @@
+#!/bin/sh
+[ "$NAME" = "$NODE" ] && exit 0
+echo $SUBNET
+ip route del $SUBNET dev $INTERFACE
+iptables -t nat -D POSTROUTING -s $SUBNET ! -o $INTERFACE -j MASQUERADE
